@@ -6,6 +6,9 @@ Minimalist, intense, and cinematic dark countdown for **1337 Tétouan Integratio
 
 ## 🎯 Visual Architecture
 
+- **100% Self-Contained & Offline-Ready** :
+  - **`index.html`** is completely packed into a single standalone file.
+  - **Zero online/external dependencies** : No external Google Fonts, no CDN links, and no remote requests. Works reliably without an internet connection on TVs, Raspberry Pis, and cluster machines.
 - **Background Void** : Pure deep black (**`#000000`**).
 - **Subtle White Binary Stream** : Ghosted digital binary rain (`0`s and `1`s) cascading in soft white at low opacity (8% – 20%), providing an elegant technical atmosphere without visual noise. Pre-populated across the entire viewport from the first frame.
 - **Monolith Countdown (Center)** :
@@ -23,9 +26,9 @@ Minimalist, intense, and cinematic dark countdown for **1337 Tétouan Integratio
 ## 📁 File Structure
 
 ```text
-├── index.html              # Monolithic markup & binary canvas
-├── style.css               # Clean dark styling: black void, white monolith, subtle borders
-├── script.js               # Countdown engine, 1337/2026 tumbler, and ghost white BinaryRain
+├── index.html              # 100% self-contained, packed standalone countdown (zero external dependencies)
+├── style.css               # Modular CSS source
+├── script.js               # Modular JS source
 ├── favicon.svg             # 1337 vector favicon
 ├── assets/
 │   └── 1337_Typography/    # Master 1337 vector typography (0-9 and letters B, E, R, A, D, Y)
@@ -34,8 +37,15 @@ Minimalist, intense, and cinematic dark countdown for **1337 Tétouan Integratio
 
 ---
 
-## ⚡ How to Run
+## ⚡ How to Run Locally
+
+Open `index.html` directly in any web browser (no local web server or internet connection required):
 
 ```bash
 open index.html
+```
+
+Or on Linux / TV:
+```bash
+xdg-open index.html
 ```
