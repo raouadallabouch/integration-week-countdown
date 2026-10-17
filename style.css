@@ -1,0 +1,591 @@
+/* ==========================================================================
+   1337 TÉTOUAN — PROMOTION 2026 COUNTDOWN
+   Pure Minimalist Monolith | Deep Black Background | Ghost White Binary
+   ========================================================================== */
+
+:root {
+    --promo-red: #df2635;
+    --promo-red-glow: rgba(223, 38, 53, 0.2);
+    --bg-black: #000000;
+    --text-primary: #ffffff;
+    --text-muted: #8c909b;
+    --text-faint: #282a32;
+    --border-light: rgba(255, 255, 255, 0.12);
+    --font-mono: 'JetBrains Mono', monospace;
+    --digit-aspect-ratio: 0.60533; /* 164.54 / 271.81 */
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-black);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+}
+
+/* Base Body Layout */
+.monolith-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 2.5rem 3rem;
+    position: relative;
+    background: var(--bg-black);
+}
+
+/* Background Falling Binary Stream Canvas */
+.binary-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   1337 MORPHING LOGO & STAGE HEADER
+   ========================================================================== */
+.stage-header-row {
+    width: 100%;
+    align-self: stretch;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(1rem, 2.5vw, 2.5rem);
+}
+
+.morph-logo {
+    --logo-h: clamp(28px, 4vw, 54px);
+    display: flex;
+    align-items: center;
+    height: var(--logo-h);
+    cursor: default;
+    gap: 0; /* Exact spacing controlled via official 1337 SVG metrics */
+}
+
+.morph-slot {
+    height: var(--logo-h);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Exact Slot Dimensions & Spacing from Official 1337 Logo SVG (viewBox 0 0 76 20) */
+/* Digit 1: width = 11.8484 / 20 = 0.59242 * H */
+/* Gap 1 to 3: margin-right = 9.5301 / 20 = 0.476505 * H */
+#slot0 {
+    width: calc(var(--logo-h) * (11.8484 / 20));
+    margin-right: calc(var(--logo-h) * (9.5301 / 20));
+}
+
+/* Digit 3: width = 12.1060 / 20 = 0.60530 * H */
+/* Gap 3 to 3: margin-right = 8.7574 / 20 = 0.43787 * H */
+#slot1 {
+    width: calc(var(--logo-h) * (12.1060 / 20));
+    margin-right: calc(var(--logo-h) * (8.7574 / 20));
+}
+
+/* Digit 3: width = 12.1060 / 20 = 0.60530 * H */
+/* Gap 3 to 7: margin-right = 8.2423 / 20 = 0.412115 * H */
+#slot2 {
+    width: calc(var(--logo-h) * (12.1060 / 20));
+    margin-right: calc(var(--logo-h) * (8.2423 / 20));
+}
+
+/* Digit 7: width = 12.6211 / 20 = 0.631055 * H */
+#slot3 {
+    width: calc(var(--logo-h) * (12.6211 / 20));
+    margin-right: 0;
+}
+
+/* Digits inside Morph Slot */
+.morph-digit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
+    will-change: transform, opacity;
+}
+
+.morph-digit svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.morph-digit svg path,
+.morph-digit svg polygon {
+    fill: #ffffff;
+}
+
+/* Tumbler Motion States */
+.morph-digit.enter-down {
+    transform: translateY(-105%);
+    opacity: 0;
+}
+
+.morph-digit.enter-up {
+    transform: translateY(105%);
+    opacity: 0;
+}
+
+.morph-digit.current {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.morph-digit.exit-up {
+    transform: translateY(-105%);
+    opacity: 0;
+}
+
+.morph-digit.exit-down {
+    transform: translateY(105%);
+    opacity: 0;
+}
+
+/* ==========================================================================
+   CENTER SUSPENSEFUL COUNTDOWN STAGE WITH BIG 'BE READY'
+   ========================================================================== */
+.countdown-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.stage-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch; /* Stretches header row so BE READY & 1337 frame the countdown perfectly */
+    justify-content: center;
+    gap: clamp(0.75rem, 1.6vw, 1.4rem);
+    width: fit-content;
+    max-width: 100%;
+}
+
+.stage-headline-vector {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+}
+
+.word-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 0.5vw, 8px);
+}
+
+.word-spacer {
+    width: clamp(14px, 1.8vw, 28px);
+}
+
+.char-cell {
+    height: clamp(28px, 4vw, 54px);
+    width: calc(clamp(28px, 4vw, 54px) * var(--digit-aspect-ratio));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.char-cell svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.char-cell svg path,
+.char-cell svg polygon {
+    fill: #ffffff;
+}
+
+.countdown-monolith {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.75rem, 2vw, 2.2rem);
+    max-width: 1400px;
+}
+
+.time-unit-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.digits-pair {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 0.8vw, 10px);
+}
+
+/* Digit Cell Container */
+.digit-cell {
+    height: clamp(85px, 14vw, 165px);
+    width: calc(clamp(85px, 14vw, 165px) * var(--digit-aspect-ratio));
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.digit-slide-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    will-change: transform, opacity;
+}
+
+.digit-slide-wrap svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.digit-slide-wrap svg path,
+.digit-slide-wrap svg polygon {
+    fill: #ffffff;
+}
+
+/* Sliding Transitions */
+.digit-slide-wrap.entering {
+    transform: translateY(105%);
+    opacity: 0;
+}
+
+.digit-slide-wrap.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.digit-slide-wrap.leaving {
+    transform: translateY(-105%);
+    opacity: 0;
+}
+
+/* Colons Separators */
+.colon-cell {
+    height: clamp(85px, 14vw, 165px);
+    width: calc(clamp(85px, 14vw, 165px) * 0.2307);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thirteen-colon-svg {
+    height: 100%;
+    width: 100%;
+}
+
+.thirteen-colon-svg rect {
+    fill: #ffffff;
+}
+
+/* ==========================================================================
+   DISCREET BOTTOM BAR & AUTO-HIDE CONTROLS
+   ========================================================================== */
+.bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    position: absolute;
+    bottom: 2.5rem;
+    left: 0;
+    padding: 0 3rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    z-index: 10;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Auto-hide controls and cursor after 2s of inactivity (Mouse / TV pointer) */
+body.user-idle {
+    cursor: none !important;
+}
+
+body.user-idle * {
+    cursor: none !important;
+}
+
+body.user-idle .bottom-bar {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+}
+
+.actions-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.icon-action-btn {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-muted);
+    padding: 0.4rem 0.55rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.icon-action-btn:hover {
+    color: var(--promo-red);
+    border-color: var(--promo-red);
+    background: rgba(223, 38, 53, 0.04);
+}
+
+/* ==========================================================================
+   MINIMAL DATE PICKER MODAL
+   ========================================================================== */
+.settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.settings-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 13, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background: #111115;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    width: 360px;
+    max-width: 90vw;
+    padding: 1.5rem;
+    z-index: 1001;
+    transform: scale(0.96);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.settings-modal.active .modal-box {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.modal-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.1em;
+}
+
+.close-x {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.close-x:hover {
+    color: #ffffff;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.date-input {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    outline: none;
+    color: #ffffff;
+    background: #18181f;
+}
+
+.date-input:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.quick-chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.chip-btn {
+    background: #18181f;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    border-radius: 4px;
+    cursor: pointer;
+    color: #ffffff;
+    transition: all 0.15s ease;
+}
+
+.chip-btn:hover {
+    border-color: #ffffff;
+    background: #252530;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 0.65rem;
+}
+
+.btn-primary {
+    flex: 1;
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 0.65rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.btn-ghost {
+    background: #18181f;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.65rem 0.9rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-ghost:hover {
+    color: #ffffff;
+    background: #252530;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT
+   ========================================================================== */
+@media (max-width: 900px) {
+    .monolith-body {
+        padding: 1.5rem;
+        height: auto;
+        min-height: 100vh;
+    }
+    .bottom-bar {
+        position: static;
+        margin-top: 2rem;
+        padding: 0;
+    }
+    .countdown-monolith {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 2rem 1.5rem;
+        align-items: center;
+        justify-items: center;
+    }
+    .colon-cell {
+        display: none; /* Hide colons in 2x2 grid on mobile */
+    }
+    .digit-cell {
+        height: clamp(65px, 16vw, 110px);
+    }
+}
+
+@media (max-width: 500px) {
+    .char-cell {
+        height: clamp(20px, 5.5vw, 28px);
+        width: calc(clamp(20px, 5.5vw, 28px) * var(--digit-aspect-ratio));
+    }
+    .morph-logo {
+        --logo-h: clamp(20px, 5.5vw, 28px);
+    }
+    .word-spacer {
+        width: clamp(10px, 2.5vw, 16px);
+    }
+    .countdown-monolith {
+        grid-gap: 1.75rem 1rem;
+    }
+}

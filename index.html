@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1337 // INTEGRATION WEEK</title>
+    <meta name="description" content="1337 Coding School — Integration Week Countdown.">
+    
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="monolith-body">
+    <!-- BACKGROUND FALLING BINARY ANIMATION -->
+    <canvas id="binaryCanvas" class="binary-canvas"></canvas>
+
+    <!-- CENTER SUSPENSEFUL COUNTDOWN WITH 'BE READY' AND '1337' ABOVE DIGITS -->
+    <main class="countdown-stage">
+        <div class="stage-container">
+            <div class="stage-header-row">
+                <!-- BE READY (LEFT-ALIGNED ABOVE DAYS) -->
+                <div class="stage-headline-vector" role="heading" aria-level="1" aria-label="BE READY">
+                    <div class="word-group">
+                        <div class="char-cell" title="B">
+                            <svg viewBox="0 0 120.66 199.36"><path d="M120.66,85.44V23.3h-28.24v62.14H28.23V23.3h64.19V0H0v199.36h92.42v-23.3h28.24v-67.31h-28.24v-23.3h28.24ZM92.41,176.06H28.24v-67.32h64.17v67.32Z"/></svg>
+                        </div>
+                        <div class="char-cell" title="E">
+                            <svg viewBox="0 0 120.67 199.36"><path d="M120.67,176.06H28.24v-67.32h84.73s0-23.3,0-23.3H28.24V23.3h92.43s0-23.3,0-23.3H0s0,199.36,0,199.36h120.67s0-23.3,0-23.3Z"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="word-spacer"></div>
+
+                    <div class="word-group">
+                        <div class="char-cell" title="R">
+                            <svg viewBox="0 0 120.66 199.36"><polygon points="92.42 85.45 92.42 108.74 120.66 108.75 120.66 199.36 92.42 199.36 92.41 108.74 28.24 108.74 28.24 199.36 0 199.36 0 0 92.42 0 92.42 23.3 28.23 23.3 28.23 85.44 92.42 85.44 92.42 23.3 120.66 23.3 120.66 85.44 92.42 85.45"/></svg>
+                        </div>
+                        <div class="char-cell" title="E">
+                            <svg viewBox="0 0 120.67 199.36"><path d="M120.67,176.06H28.24v-67.32h84.73s0-23.3,0-23.3H28.24V23.3h92.43s0-23.3,0-23.3H0s0,199.36,0,199.36h120.67s0-23.3,0-23.3Z"/></svg>
+                        </div>
+                        <div class="char-cell" title="A">
+                            <svg viewBox="0 0 120.92 199.36"><path d="M0,0v199.36h28.24v-90.61h64.43v90.61h28.25V0H0ZM92.67,85.44H28.24V23.3h64.43v62.14Z"/></svg>
+                        </div>
+                        <div class="char-cell" title="D">
+                            <svg viewBox="0 0 120.66 199.36"><polygon points="120.66 0 120.66 199.36 28.24 199.36 28.24 176.06 0 176.06 0 23.3 28.24 23.3 28.25 176.06 92.42 176.06 92.43 23.3 28.24 23.3 28.24 0 120.66 0"/></svg>
+                        </div>
+                        <div class="char-cell" title="Y">
+                            <svg viewBox="0 0 120.67 199.36"><polygon points="120.67 0 120.67 85.43 120.66 85.43 120.66 108.74 74.45 108.74 74.45 199.36 46.2 199.36 46.2 108.74 0 108.74 0 0 28.24 0 28.24 85.43 92.43 85.43 92.43 0 120.67 0"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1337 MORPHING LOGO (RIGHT-ALIGNED DIRECTLY ABOVE SECONDS) -->
+                <div class="morph-logo" id="morphLogo" title="1337 // 2026">
+                    <div class="morph-slot" id="slot0">
+                        <div class="morph-digit current">
+                            <svg viewBox="0 0 118.11 199.36"><path id="path-1" d="M28.24,176.06h30.81V23.3H23.11v31.07H0V0h87.3v176.06h30.81v23.3H28.24v-23.3Z"/></svg>
+                        </div>
+                    </div>
+                    <div class="morph-slot" id="slot1">
+                        <div class="morph-digit current">
+                            <svg viewBox="0 0 120.67 199.36"><path id="path-3" d="M0,176.06h92.43v-67.32H7.7v-23.3h84.73V23.3H0V0h120.67v199.36H0v-23.3Z"/></svg>
+                        </div>
+                    </div>
+                    <div class="morph-slot" id="slot2">
+                        <div class="morph-digit current">
+                            <svg viewBox="0 0 120.67 199.36"><path id="path-3" d="M0,176.06h92.43v-67.32H7.7v-23.3h84.73V23.3H0V0h120.67v199.36H0v-23.3Z"/></svg>
+                        </div>
+                    </div>
+                    <div class="morph-slot" id="slot3">
+                        <div class="morph-digit current">
+                            <svg viewBox="0 0 125.81 199.36"><path id="path-4" d="M100.13,23.3H23.11v49.19H0V0h125.81v199.36h-25.68V23.3Z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="countdown-monolith" id="countdownMonolith">
+            
+            <!-- DAYS -->
+            <div class="time-unit-group" data-unit="days">
+                <div class="digits-pair">
+                    <div class="digit-cell" id="d0"></div>
+                    <div class="digit-cell" id="d1"></div>
+                </div>
+            </div>
+
+            <!-- SEPARATOR -->
+            <div class="colon-cell">
+                <svg viewBox="0 0 46 199.37" class="thirteen-colon-svg">
+                    <rect x="8.88" y="48" width="28.24" height="28.24" />
+                    <rect x="8.88" y="122.89" width="28.24" height="28.24" />
+                </svg>
+            </div>
+
+            <!-- HOURS -->
+            <div class="time-unit-group" data-unit="hours">
+                <div class="digits-pair">
+                    <div class="digit-cell" id="h0"></div>
+                    <div class="digit-cell" id="h1"></div>
+                </div>
+            </div>
+
+            <!-- SEPARATOR -->
+            <div class="colon-cell">
+                <svg viewBox="0 0 46 199.37" class="thirteen-colon-svg">
+                    <rect x="8.88" y="48" width="28.24" height="28.24" />
+                    <rect x="8.88" y="122.89" width="28.24" height="28.24" />
+                </svg>
+            </div>
+
+            <!-- MINUTES -->
+            <div class="time-unit-group" data-unit="minutes">
+                <div class="digits-pair">
+                    <div class="digit-cell" id="m0"></div>
+                    <div class="digit-cell" id="m1"></div>
+                </div>
+            </div>
+
+            <!-- SEPARATOR -->
+            <div class="colon-cell">
+                <svg viewBox="0 0 46 199.37" class="thirteen-colon-svg">
+                    <rect x="8.88" y="48" width="28.24" height="28.24" />
+                    <rect x="8.88" y="122.89" width="28.24" height="28.24" />
+                </svg>
+            </div>
+
+            <!-- SECONDS -->
+            <div class="time-unit-group" data-unit="seconds">
+                <div class="digits-pair">
+                    <div class="digit-cell" id="s0"></div>
+                    <div class="digit-cell" id="s1"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+    <!-- DISCREET BOTTOM BAR (AUTO-HIDES AFTER 2S OF INACTIVITY) -->
+    <footer class="bottom-bar" id="bottomBar">
+        <div class="actions-group">
+            <button id="fullscreenBtn" class="icon-action-btn" title="Fullscreen" aria-label="Fullscreen">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                </svg>
+            </button>
+            <button id="configToggleBtn" class="icon-action-btn" title="Edit Target Date" aria-label="Settings">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+            </button>
+        </div>
+    </footer>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settingsModal" class="settings-modal" aria-hidden="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span class="modal-label">TARGET DATE // INTEGRATION WEEK</span>
+                <button id="closeModalBtn" class="close-x">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="datetime-local" id="targetDateTimeInput" class="date-input">
+                <div class="quick-chips">
+                    <button type="button" class="chip-btn" data-days="3">+3 Days</button>
+                    <button type="button" class="chip-btn" data-days="7">+7 Days</button>
+                    <button type="button" class="chip-btn" data-preset="nov2026">02 Nov 2026</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveDateBtn" class="btn-primary">SAVE</button>
+                <button id="resetDateBtn" class="btn-ghost">DEFAULT</button>
+            </div>
+        </div>
+    </div>
+    <div id="modalBackdrop" class="modal-backdrop"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
