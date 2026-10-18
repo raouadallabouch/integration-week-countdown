@@ -22,10 +22,27 @@
     };
 
     function createDigitSvg(digit) {
+        const template = document.getElementById('svg-1337-' + digit);
+        if (template) {
+            const clone = template.cloneNode(true);
+            clone.removeAttribute('id');
+            clone.style.display = 'block';
+            return clone;
+        }
         const item = DIGIT_DATA[digit] || DIGIT_DATA[0];
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('viewBox', item.viewBox);
-        svg.innerHTML = item.body;
+        try {
+            svg.innerHTML = item.body;
+        } catch (e) {
+            try {
+                const doc = new DOMParser().parseFromString(
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + item.viewBox + '">' + item.body + '</svg>',
+                    'image/svg+xml'
+                );
+                return doc.documentElement;
+            } catch (err) {}
+        }
         return svg;
     }
 
