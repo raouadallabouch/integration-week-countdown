@@ -214,7 +214,7 @@
         const currentWrap = cell.querySelector('.digit-slide-wrap.active');
 
         // Initial populate without slide animation
-        if (!currentWrap) {
+        if (oldDigit === null || !currentWrap) {
             cell.innerHTML = '';
             const newWrap = document.createElement('div');
             newWrap.className = 'digit-slide-wrap active';
@@ -237,7 +237,7 @@
 
         setTimeout(() => {
             currentWrap.remove();
-        }, 240);
+        }, 260);
     }
 
     function tickCountdown() {
@@ -396,8 +396,7 @@
                 length,
                 chars,
                 opacity: 0.08 + Math.random() * 0.14,
-                isRed: Math.random() < 0.2,
-                isRed: Math.random() < 0.18
+                isRed: Math.random() < 0.2
             };
         }
 

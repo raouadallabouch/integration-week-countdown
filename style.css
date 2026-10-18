@@ -591,7 +591,7 @@ body.user-idle .bottom-bar {
 }
 
 /* ==========================================================================
-   PERMANENT RED CYBER GLITCH SYSTEM (ZERO TRIMMING - 100% SOLID DIGITS)
+   PERMANENT RED CYBER GLITCH SYSTEM (PRESERVES 100% CLEAN VERTICAL DIGIT SLIDE)
    ========================================================================== */
 
 /* 1. Permanent Red Ambient Scanlines */
@@ -614,7 +614,7 @@ body::before {
     opacity: 0.85;
 }
 
-/* 2. Continuous Red Screen Tear Overlay (Separate layer, never trims numbers) */
+/* 2. Continuous Red Screen Tear Overlay (Runs on separate layer, never touches numbers) */
 .screen-glitch-tear {
     position: fixed;
     top: 0;
@@ -707,197 +707,113 @@ body::before {
     }
 }
 
-/* 3. Numbers: Permanent Red Chromatic Aberration & Jitter (NO CLIPPING, NO TRIMMING) */
+/* 3. Numbers: Permanent Red Chromatic Aberration via drop-shadow ONLY (Zero transform/clipping on digits) */
 .countdown-monolith {
     animation: alwaysRedGlitchMonolith 3.6s infinite linear;
-    will-change: filter, transform;
+    will-change: filter;
 }
 
 @keyframes alwaysRedGlitchMonolith {
     0%, 100% {
         filter: drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.9)) drop-shadow(2px 0 0 rgba(223, 38, 53, 0.45));
-        transform: translate3d(0, 0, 0);
     }
     4% {
         filter: drop-shadow(-4px 0 0 #df2635) drop-shadow(2px 0 0 rgba(223, 38, 53, 0.7));
-        transform: translate3d(-1px, 0, 0);
     }
     5% {
         filter: drop-shadow(4px 0 0 #df2635) drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.6));
-        transform: translate3d(1.5px, 0, 0);
     }
     6.5% {
         filter: drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.9)) drop-shadow(2px 0 0 rgba(223, 38, 53, 0.45));
-        transform: translate3d(0, 0, 0);
     }
     21% {
         filter: drop-shadow(-2.5px 0 0 rgba(223, 38, 53, 0.95));
-        transform: translate3d(0, 0, 0);
     }
     22% {
         filter: drop-shadow(-5px 0 0 #df2635) drop-shadow(3px 0 0 rgba(255, 255, 255, 0.35));
-        transform: translate3d(-2px, 0, 0);
     }
     23.5% {
         filter: drop-shadow(5px 0 0 #df2635) drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.7));
-        transform: translate3d(2px, 0, 0);
     }
     25% {
         filter: drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.9)) drop-shadow(2px 0 0 rgba(223, 38, 53, 0.45));
-        transform: translate3d(0, 0, 0);
     }
     47% {
         filter: drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.9));
     }
     48% {
         filter: drop-shadow(-4px 0 1px #df2635) drop-shadow(3px 0 0 rgba(223, 38, 53, 0.6));
-        transform: translate3d(-1.5px, 0, 0);
     }
     49.5% {
         filter: drop-shadow(4px 0 1px #df2635);
-        transform: translate3d(1.5px, 0, 0);
     }
     51% {
         filter: drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.9)) drop-shadow(2px 0 0 rgba(223, 38, 53, 0.45));
-        transform: translate3d(0, 0, 0);
     }
     76% {
         filter: drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.9));
     }
     77% {
         filter: drop-shadow(-5.5px 0 0 #df2635) drop-shadow(4px 0 0 rgba(255, 255, 255, 0.45));
-        transform: translate3d(-2.5px, 0, 0);
     }
     78.5% {
         filter: drop-shadow(5px 0 0 #df2635) drop-shadow(-3px 0 0 rgba(223, 38, 53, 0.8));
-        transform: translate3d(2.5px, 0, 0);
     }
     80.5% {
         filter: drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.9)) drop-shadow(2px 0 0 rgba(223, 38, 53, 0.45));
-        transform: translate3d(0, 0, 0);
     }
 }
 
-/* 4. Individual Digits Micro-Jitter (NO CLIPPING, NO TRIMMING - Numbers stay 100% whole) */
-.digit-cell:nth-child(even) .digit-slide-wrap {
-    animation: alwaysJitterEven 3.4s infinite linear;
-}
-
-.digit-cell:nth-child(odd) .digit-slide-wrap {
-    animation: alwaysJitterOdd 3.9s infinite linear;
-}
-
-@keyframes alwaysJitterEven {
-    0%, 100% {
-        transform: translate3d(0, 0, 0);
-    }
-    11% {
-        transform: translate3d(2px, 0, 0);
-    }
-    12% {
-        transform: translate3d(-2px, 0, 0);
-    }
-    13% {
-        transform: translate3d(0, 0, 0);
-    }
-    54% {
-        transform: translate3d(-2.5px, 0, 0);
-    }
-    55% {
-        transform: translate3d(2.5px, 0, 0);
-    }
-    56% {
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-@keyframes alwaysJitterOdd {
-    0%, 100% {
-        transform: translate3d(0, 0, 0);
-    }
-    31% {
-        transform: translate3d(-2px, 0, 0);
-    }
-    32% {
-        transform: translate3d(2px, 0, 0);
-    }
-    33% {
-        transform: translate3d(0, 0, 0);
-    }
-    72% {
-        transform: translate3d(2.5px, 0, 0);
-    }
-    73% {
-        transform: translate3d(-2.5px, 0, 0);
-    }
-    74% {
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-/* 5. Header Row (BE READY & 1337 Logo) Continuous Red Glitch */
+/* 4. Header Row (BE READY & 1337 Logo) Continuous Red Glitch */
 .stage-header-row {
     animation: alwaysRedGlitchHeader 4s infinite linear;
-    will-change: filter, transform;
+    will-change: filter;
 }
 
 @keyframes alwaysRedGlitchHeader {
     0%, 100% {
         filter: drop-shadow(-1.5px 0 0 rgba(223, 38, 53, 0.8)) drop-shadow(1.5px 0 0 rgba(223, 38, 53, 0.4));
-        transform: translate3d(0, 0, 0);
     }
     8% {
         filter: drop-shadow(-3px 0 0 #df2635);
-        transform: translate3d(-1px, 0, 0);
     }
     9% {
         filter: drop-shadow(3px 0 0 #df2635);
-        transform: translate3d(1px, 0, 0);
     }
     10% {
         filter: drop-shadow(-1.5px 0 0 rgba(223, 38, 53, 0.8)) drop-shadow(1.5px 0 0 rgba(223, 38, 53, 0.4));
-        transform: translate3d(0, 0, 0);
     }
     41% {
         filter: drop-shadow(-3.5px 0 0 #df2635);
-        transform: translate3d(1.5px, 0, 0);
     }
     42.5% {
         filter: drop-shadow(3.5px 0 0 #df2635);
-        transform: translate3d(-1.5px, 0, 0);
     }
     44% {
         filter: drop-shadow(-1.5px 0 0 rgba(223, 38, 53, 0.8)) drop-shadow(1.5px 0 0 rgba(223, 38, 53, 0.4));
-        transform: translate3d(0, 0, 0);
     }
     88% {
         filter: drop-shadow(-4px 0 0 #df2635);
-        transform: translate3d(-2px, 0, 0);
     }
     89.5% {
         filter: drop-shadow(4px 0 0 #df2635);
-        transform: translate3d(2px, 0, 0);
     }
     91% {
         filter: drop-shadow(-1.5px 0 0 rgba(223, 38, 53, 0.8)) drop-shadow(1.5px 0 0 rgba(223, 38, 53, 0.4));
-        transform: translate3d(0, 0, 0);
     }
 }
 
-/* 6. Heavy Glitch Surge (Occurs periodically or on screen touch) */
+/* 5. Heavy Glitch Surge (Occurs periodically or on screen touch) */
 body.is-glitching .countdown-monolith {
     filter: drop-shadow(-7px 0 0 #df2635) drop-shadow(6px 0 0 rgba(255, 255, 255, 0.6)) !important;
-    transform: translate3d(4px, 0, 0) !important;
 }
 
 body.is-glitching .stage-header-row {
     filter: drop-shadow(-5px 0 0 #df2635) drop-shadow(4px 0 0 rgba(255, 255, 255, 0.55)) !important;
-    transform: translate3d(-3px, 0, 0) !important;
 }
 
 body.is-glitching .screen-glitch-tear {
     opacity: 1 !important;
     background: rgba(223, 38, 53, 0.26) !important;
     clip-path: inset(30% 0 42% 0) !important;
-    transform: translate3d(-10px, 0, 0) !important;
 }
