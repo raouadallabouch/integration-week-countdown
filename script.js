@@ -480,11 +480,49 @@
     }
 
     // --- Init ---
+    
+    // ==========================================================================
+    // 6. CYBER TERMINAL GLITCH SYSTEM
+    // Triggers authentic digital interference bursts periodically (every 7-14s)
+    // ==========================================================================
+    function setupGlitchSystem() {
+        let isGlitching = false;
+
+        function triggerGlitch(duration = 260) {
+            if (isGlitching) return;
+            isGlitching = true;
+            document.body.classList.add('is-glitching');
+
+            setTimeout(() => {
+                document.body.classList.remove('is-glitching');
+                isGlitching = false;
+            }, duration);
+        }
+
+        // Periodic suspense glitch (every 8 to 15 seconds)
+        function queueNextGlitch() {
+            const nextDelay = 8000 + Math.random() * 7000;
+            setTimeout(() => {
+                triggerGlitch(200 + Math.random() * 120);
+                queueNextGlitch();
+            }, nextDelay);
+        }
+
+        queueNextGlitch();
+
+        // Also trigger on click/tap on background as an interactive easter egg
+        window.addEventListener('click', (e) => {
+            if (e.target.closest('#settingsModal') || e.target.closest('.bottom-bar')) return;
+            triggerGlitch(280);
+        }, { passive: true });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         updateTargetDisplay();
         initMorphLogo();
         setupModal();
         setupIdleDetector();
+        setupGlitchSystem();
 
         // Initialize Falling Binary Background Animation
         const binaryCanvas = document.getElementById('binaryCanvas');

@@ -601,11 +601,143 @@ body.user-idle .bottom-bar {
     }
 }
 
+
+/* ==========================================================================
+   CYBER GLITCH SYSTEM (SUSPENSEFUL TERMINAL TEARS & CHROMATIC JITTER)
+   ========================================================================== */
+.screen-glitch-tear {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 6;
+    opacity: 0;
+}
+
+body.is-glitching .screen-glitch-tear {
+    opacity: 1;
+    animation: screenTear 0.28s steps(2) forwards;
+}
+
+@keyframes screenTear {
+    0% {
+        clip-path: inset(28% 0 68% 0);
+        transform: translate3d(-4px, 0, 0) skewX(-2deg);
+        background: rgba(223, 38, 53, 0.12);
+    }
+    20% {
+        clip-path: inset(72% 0 16% 0);
+        transform: translate3d(5px, 0, 0) skewX(2deg);
+        background: rgba(255, 255, 255, 0.08);
+    }
+    40% {
+        clip-path: inset(12% 0 82% 0);
+        transform: translate3d(-3px, 0, 0);
+        background: rgba(223, 38, 53, 0.15);
+    }
+    60% {
+        clip-path: inset(48% 0 42% 0);
+        transform: translate3d(4px, 0, 0) skewX(-1deg);
+        background: rgba(255, 255, 255, 0.06);
+    }
+    80% {
+        clip-path: inset(85% 0 6% 0);
+        transform: translate3d(-2px, 0, 0);
+        background: rgba(223, 38, 53, 0.1);
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+    }
+}
+
+/* Subtle CRT Micro-flicker */
+body.is-glitching {
+    animation: bodyFlicker 0.28s ease forwards;
+}
+
+@keyframes bodyFlicker {
+    0%, 100% { opacity: 1; }
+    30% { opacity: 0.94; }
+    60% { opacity: 0.98; }
+}
+
+/* Monolith Numbers Jitter & Chromatic Aberration */
+body.is-glitching .countdown-monolith {
+    animation: monolithGlitch 0.28s steps(3) forwards;
+}
+
+@keyframes monolithGlitch {
+    0% {
+        transform: translate3d(-2px, 1px, 0);
+        filter: drop-shadow(2px 0 0 rgba(223, 38, 53, 0.85)) drop-shadow(-2px 0 0 rgba(255, 255, 255, 0.4));
+    }
+    33% {
+        transform: translate3d(3px, -1px, 0) skewX(-0.8deg);
+        filter: drop-shadow(-3px 0 0 rgba(223, 38, 53, 0.9)) drop-shadow(2px 0 0 rgba(255, 255, 255, 0.6));
+    }
+    66% {
+        transform: translate3d(-1px, 2px, 0) skewX(0.8deg);
+        filter: drop-shadow(2px 0 0 rgba(223, 38, 53, 0.75));
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+        filter: none;
+    }
+}
+
+/* Header Row (BE READY & 1337 Logo) Glitch */
+body.is-glitching .stage-header-row {
+    animation: headerGlitch 0.28s steps(2) forwards;
+}
+
+@keyframes headerGlitch {
+    0% {
+        transform: translate3d(2px, 0, 0);
+        filter: drop-shadow(-2px 0 0 rgba(223, 38, 53, 0.8));
+    }
+    50% {
+        transform: translate3d(-2px, 0, 0);
+        filter: drop-shadow(2px 0 0 rgba(223, 38, 53, 0.8));
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+        filter: none;
+    }
+}
+
+/* Horizontal Slice Shifts on Individual Digits */
+body.is-glitching .digit-cell:nth-child(even) .digit-slide-wrap,
+body.is-glitching .morph-slot:nth-child(odd) {
+    animation: sliceGlitch 0.26s steps(2) forwards;
+}
+
+@keyframes sliceGlitch {
+    0% {
+        clip-path: inset(0 0 45% 0);
+        transform: translate3d(3px, 0, 0);
+    }
+    50% {
+        clip-path: inset(55% 0 0 0);
+        transform: translate3d(-3px, 0, 0);
+    }
+    100% {
+        clip-path: none;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
     </style>
 </head>
 <body class="monolith-body">
     <!-- BACKGROUND FALLING BINARY ANIMATION -->
     <canvas id="binaryCanvas" class="binary-canvas"></canvas>
+
+    <!-- SCREEN GLITCH SCANLINE & TEAR OVERLAY -->
+    <div class="screen-glitch-tear" id="screenGlitchTear"></div>
 
     <!-- 1337 MASTER VECTOR TYPOGRAPHY EMBEDDED SPRITE (ALL 16 SVGS INCLUDED) -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none;" aria-hidden="true">
@@ -1338,11 +1470,49 @@ body.user-idle .bottom-bar {
     }
 
     // --- Init ---
+    
+    // ==========================================================================
+    // 6. CYBER TERMINAL GLITCH SYSTEM
+    // Triggers authentic digital interference bursts periodically (every 7-14s)
+    // ==========================================================================
+    function setupGlitchSystem() {
+        let isGlitching = false;
+
+        function triggerGlitch(duration = 260) {
+            if (isGlitching) return;
+            isGlitching = true;
+            document.body.classList.add('is-glitching');
+
+            setTimeout(() => {
+                document.body.classList.remove('is-glitching');
+                isGlitching = false;
+            }, duration);
+        }
+
+        // Periodic suspense glitch (every 8 to 15 seconds)
+        function queueNextGlitch() {
+            const nextDelay = 8000 + Math.random() * 7000;
+            setTimeout(() => {
+                triggerGlitch(200 + Math.random() * 120);
+                queueNextGlitch();
+            }, nextDelay);
+        }
+
+        queueNextGlitch();
+
+        // Also trigger on click/tap on background as an interactive easter egg
+        window.addEventListener('click', (e) => {
+            if (e.target.closest('#settingsModal') || e.target.closest('.bottom-bar')) return;
+            triggerGlitch(280);
+        }, { passive: true });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         updateTargetDisplay();
         initMorphLogo();
         setupModal();
         setupIdleDetector();
+        setupGlitchSystem();
 
         // Initialize Falling Binary Background Animation
         const binaryCanvas = document.getElementById('binaryCanvas');
