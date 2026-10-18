@@ -395,7 +395,9 @@
                 speed: 1.4 + Math.random() * 2.2,
                 length,
                 chars,
-                opacity: 0.08 + Math.random() * 0.14
+                opacity: 0.08 + Math.random() * 0.14,
+                isRed: Math.random() < 0.2,
+                isRed: Math.random() < 0.18
             };
         }
 
@@ -423,14 +425,22 @@
                         const progress = j / col.length;
 
                         if (j === 0) {
-                            // Head of stream: subtle white glow
-                            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-                            this.ctx.shadowColor = 'rgba(255, 255, 255, 0.25)';
-                            this.ctx.shadowBlur = 4;
+                            if (col.isRed) {
+                                this.ctx.fillStyle = 'rgba(223, 38, 53, 0.95)';
+                                this.ctx.shadowColor = 'rgba(223, 38, 53, 0.8)';
+                                this.ctx.shadowBlur = 6;
+                            } else {
+                                this.ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+                                this.ctx.shadowColor = 'rgba(255, 255, 255, 0.3)';
+                                this.ctx.shadowBlur = 4;
+                            }
                         } else {
-                            // Trail: smoothly fading white
                             const alpha = (1 - progress) * col.opacity;
-                            this.ctx.fillStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
+                            if (col.isRed) {
+                                this.ctx.fillStyle = 'rgba(223, 38, 53, ' + (alpha * 1.8).toFixed(3) + ')';
+                            } else {
+                                this.ctx.fillStyle = 'rgba(255, 255, 255, ' + alpha.toFixed(3) + ')';
+                            }
                             this.ctx.shadowBlur = 0;
                         }
 
